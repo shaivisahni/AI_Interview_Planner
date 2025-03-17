@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Question Generator</title>
+    <style>
+        /* Style for the container and form elements */
+        .container {
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Styling the textarea and button */
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Styling the output box */
+        .output-box {
+            width: 100%;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #0e0e0e;
+            
+            display: none; /* Hidden by default */
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Interview Plan Generator</h1>
+        
+        <div class="form-group">
+            <label for="jobInput">Enter the Job Title or Description:</label>
+            <textarea id="jobInput" placeholder="Enter job title or description..."></textarea>
+        </div>
+
+        <button id="generateBtn">Generate Interview Questions</button>
+        
+        <h2>Interview Plan</h2>
+        <div class="output-box" id="outputBox">
+            
+            <p id="generatedPlan">Example Interview Plan: <br> </p>
+        </div>
+    </div>
+
+    <script>
+        
+        document.getElementById("generateBtn").addEventListener("click", function() {
+            
+            const jobDescription = document.getElementById("jobInput").value;
+
+            
+            document.getElementById("generatedPlan").textContent = generatedPlan;
+
+            // Show the output box
+            document.getElementById("outputBox").style.display = "block";
+        });
+    </script>
+
+</body>
+</html>
