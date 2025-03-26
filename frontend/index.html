@@ -1,13 +1,85 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Question Generator</title>
+    <style>
+        .container {
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .output-box {
+            width: 100%;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #0e0e0e;
+            display: none;
+        }
+    </style>
+</head>
+<body>
 
-<html>
-    <head>
-        <title>Interview Question Generator</title>
-    </head>
+    <div class="container">
+        <h1>Interview Plan Generator</h1>
 
-    <body>
-        <h1> hihi </h1>
-        <p>insert some rando texto</pp>
-    </body>
+        <div class="form-group">
+            <label for="jobInput">Enter the Job Title or Description:</label>
+            <textarea id="jobInput" placeholder="Enter job title or description..."></textarea>
+        </div>
 
+        <button id="generateBtn">Generate Interview Questions</button>
+
+        <h2>Interview Plan</h2>
+        <div class="output-box" id="outputBox">
+            <p id="generatedPlan">Example Interview Plan: <br> </p>
+        </div>
+    </div>
+<script>
+        document.getElementById("generateBtn").addEventListener("click", async function () {
+            const jobDescription = document.getElementById("jobInput").value;
+
+            if (!jobDescription) {
+                alert("Please enter a job description.");
+                return;
+            }
+
+            try {
+
+                const response = await fetch("http://127.0.0.1:8000/generate", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ prompt: jobDescription })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById("generatedPlan").textContent = data.response[0]?.generated_text || "No response";
+                    document.getElementById("outputBox").style.display = "block";
+                } else {
+                    document.getElementById("generatedPlan").textContent = "Error: " + data.detail;
+                }
+            } catch (error) {
+                document.getElementById("generatedPlan").textContent = "Error connecting to the server.";
+            }
+        });
+    </script>
+
+</body>
 </html>
