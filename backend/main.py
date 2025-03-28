@@ -36,8 +36,3 @@ def generate_response(prompt: str):
 async def generate(prompt: str):
     return generate_response(prompt) 
 
-
-
-@app.get("/")
-async def home():
-    return {"message": "Welcome to the AI Interview Planner!"}
