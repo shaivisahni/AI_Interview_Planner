@@ -1,14 +1,142 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <link rel="stylesheet" href="styles.css">
-        <title>Interview Question Generator</title>
-    </head>
 
-    <body>
-        <h1> hihi </h1>
-        <textarea></textarea>
-    </body>
+<head>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js defer"></script>
+
+    <title>AI Interview Generator</title>
+
+</head>
+
+<body>
+
+    <h1> Interview Question Generator </h1>
+
+    <label for=num_Of_Questions>Select how many questions you would like to Generate</label>
+    <div class="number_dropdown">
+
+        <button id="decrement">-</button>
+        <input type="number" id="num_Of_Questions">0</input>
+        <button id="increment">+</button>
+
+    </div>
+    <select name="num_Of_Questions" id="num_Of_Questions">
+
+    </select>
+</body>
 
 </html>
+
+
+<!--
+    <head>
+    <title>AI Interview Generator</title>
+    <fieldset>
+    <script>
+        function generateText() {
+            var aiMessages = [
+                "Tell me about yourself.",
+                "What is your greatest strength?",
+                "Why do you want to work here?",
+                "Describe a challenge you faced and how you handled it."
+            ];
+
+            aiMessages.forEach((message) => {
+                var newDiv = document.createElement("div");
+                newDiv.style.display = "flex"; 
+                newDiv.style.alignItems = "center"; 
+                newDiv.style.marginBottom = "5px";
+
+                
+                var textContainer = document.createElement("div");
+                textContainer.innerText = message;
+                textContainer.style.width = "80%";
+                textContainer.style.padding = "5px";
+                textContainer.style.border = "1px solid #ccc";
+                textContainer.style.background = "#f9f9f9";
+
+                
+                var editBtn = document.createElement("button");
+                editBtn.innerText = "Edit";
+                editBtn.style.marginLeft = "5px";
+                editBtn.onclick = function() {
+                    
+                    var textarea = document.createElement("textarea");
+                    textarea.value = textContainer.innerText;
+                    textarea.style.width = "80%";
+                    textarea.style.height = "40px";
+                    textarea.style.resize = "none";
+
+                    
+                    var saveBtn = document.createElement("button");
+                    saveBtn.innerText = "Save";
+                    saveBtn.style.marginLeft = "5px";
+                    saveBtn.onclick = function() {
+                        textContainer.innerText = textarea.value;
+                        newDiv.replaceChild(textContainer, textarea);
+                        newDiv.replaceChild(editBtn, saveBtn);
+                    };
+
+                    
+                    newDiv.replaceChild(textarea, textContainer);
+                    newDiv.replaceChild(saveBtn, editBtn);
+                };
+
+                
+                var deleteBtn = document.createElement("button");
+                deleteBtn.innerText = "Delete";
+                deleteBtn.style.marginLeft = "5px";
+                deleteBtn.onclick = function() {
+                    newDiv.remove();
+                };
+
+                newDiv.appendChild(textContainer);
+                newDiv.appendChild(editBtn);
+                newDiv.appendChild(deleteBtn);
+
+                document.getElementById("outputArea").appendChild(newDiv);
+            });
+        }
+        function clearAll() {
+            document.getElementById("outputArea").innerHTML = "";
+        }
+    </script>
+    </fieldset>
+</head>
+    <body>
+        <fieldset>
+        <h1>AI Interview Generator</h1>
+        <input type="text" placeholder="Enter Job Description">
+        <button type="button" onclick="generateText()">Generate</button>
+        
+        
+        <div class="dropdown">
+            <button onclick="generateText()" class="dropbtn">Dropdown</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#">5</a>
+                <a href="#">10</a>
+                <a href="#">15</a>
+                
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Type of Questions</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#">Technical</a>
+                <a href="#">Behavioural</a>
+                <a href="#">Both</a>
+            </div>
+        </div>
+    </fieldset>
+    <div id="outputArea" style="margin-top: 20px;"></div>
+    <button type="button" onclick="clearAll()" style="margin-top: 20px; background: red; color: white; padding: 10px; border: none; cursor: pointer;">
+        Clear All
+    </button>
+
+
+    </body>
+</html>
+-->
