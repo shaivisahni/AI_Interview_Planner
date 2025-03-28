@@ -1,6 +1,4 @@
 numOfQuestion = document.getElementById("num-of-question");
-//numOfBehaviouralQuestion = document.getElementById("num-of-behavioural");
-//numOfTechnicalQuestion = document.getElementById("num-of-technical");
 
 function checkNumInput() {
     let totalQuestions = parseInt(numOfQuestion.value);
@@ -18,97 +16,61 @@ function checkNumInput() {
 }
 
 async function generateResponse() {
-    const inputQuestionNumber = document.getElementById("num-of-question").value;
-    const inputQuestionType = document.querySelector('input[name="question-type"]:checked')?.value;
-    const inputJob = document.getElementById("job-title").value;
-    const inputJobDescription = document.getElementById("job-description").value;
+    const numQuestions = document.getElementById("num-of-question").value;
+    //const questionType = document.querySelector('input[name="question-type"]:checked')?.value;
+    const jobTitle = document.getElementById("job-title").value;
+    const jobDescription = document.getElementById("job-description").value;
     const company = document.getElementById("company").value;
 
-
-    if (!inputQuestionNumber || !inputQuestionType || !inputJob || !inputJobDescription || !company) {
-        document.getElementById("output").innerText = "ANSWER THE QUESTION";
+    if (!numQuestions || !jobTitle || !jobDescription || !company) {
         return;
     }
 
-    let prompt = "Generate exactly " + inputQuestionNumber + " interview questions for the following position at " + company + " company:\n";
-    prompt += "Job Title: " + inputJob + ".\n";
-    prompt += "Job Description:\n" + inputJobDescription + "\n\n";
+    const response = await fetch("http://localhost:8000/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            num_questions: parseInt(numQuestions),
+            job_title: jobTitle,
+            job_description: jobDescription,
+            company: company
+        })
+    });
 
-    if (inputQuestionType === "Both") {
-
-        if(inputQuestionNumber == 1){
-            prompt += "ONLY GENERATE ONE QUESTION. either behavioral or technical \n"
-        } else {
-            prompt += "Generate " + inputQuestionNumber + " questions that are either behavioral and the other half technical.\n";
-        }
-
-    } else {
-        prompt += "Generate " + inputQuestionNumber + " " + inputQuestionType + " questions only.\n";
-    }
-
-    prompt += "Do not include any explanations, alternatives, or extra text—only the interview questions.\n";
-    prompt += "Each question must be numbered in order, starting from 1.\n";
-    prompt += "Do not add \" behavioral \" or  \" technical \" in the response.\n";
-
-    const response = await fetch(`http://127.0.0.1:8000/generate?prompt=${encodeURIComponent(prompt)}`);
     const data = await response.json();
 
-    console.log("Full API response:", data);
+    localStorage.setItem("interviewData", JSON.stringify({
+        questions: data.questions,
+        meta: {
+            company: company,
+            jobTitle: jobTitle,
+            date: new Date().toLocaleDateString()
+        }
+    }));
 
-    document.getElementById("output").innerText = data.response.join("\n");
-
-
+    window.location.href = "question.html";
 }
 
+function displayQuestions() {
+    const data = JSON.parse(localStorage.getItem("interviewData"));
+    const outputDiv = document.getElementById("output");
 
-// some sort of a reset button
-
-
-/*let currentTotal = (parseInt(numOfBehaviouralQuestion.value) + parseInt(numOfTechnicalQuestion.value));
-
-if (totalQuestions > currentTotal) {
-    let diff = totalQuestions - currentTotal;
-
-    while (totalQuestions > currentTotal) {
-        parseInt(numOfBehaviouralQuestion.value) += 1;
-    }
-
+    outputDiv.innerHTML = `
+    <div class="questions">
+        ${data.questions.map((q, index) => `
+            <div class="question-item" id="question-${index}">
+                <!-- Only create a text box if the question is non-empty -->
+                ${q.trim() ? `
+                    <textarea id="question-text-${index}" class="question-text" rows="4">${q.trim()}</textarea>
+                    <button onclick="editQuestion(${index})" class="edit-question">Edit</button>
+                ` : ''}
+            </div>
+        `).join('')}
+    </div>
+`;
 }
 
-if (totalQuestions < currentTotal) {
-    let diff = currentTotal - totalQuestions;
+function editQuestion(){
 
-    while (totalQuestions < currentTotal && parseInt(numOfBehaviouralQuestion.value) > 0) {
-        parseInt(numOfBehaviouralQuestion.value) -= 1;
-    }
-
-    while (totalQuestions < currentTotal && parseInt(numOfTechnicalQuestion.value) > 0 && parseInt(numOfBehaviouralQuestion.value) == 0) {
-        parseInt(numOfBehaviouralQuestion.value) -= 1;
-    }
-
-}*/
-/*
-
-function maxTechnicalQuestions() {
-    numOfTechnicalQuestion.value = numOfQuestion.value - numOfBehaviouralQuestion.value
-    if (parseInt(numOfTechnicalQuestion.value) < 1) {
-        numOfTechnicalQuestion.value = 1
-    }
-
-    if (parseInt(numOfTechnicalQuestion.value) > parseInt(numOfQuestion.value)) {
-        numOfTechnicalQuestion.value = parseInt(numOfQuestion.value);
-    }
 }
-
-function maxBehaviouralQuestions() {
-    numOfBehaviouralQuestion.value = numOfQuestion.value - numOfTechnicalQuestion.value
-
-    if (parseInt(numOfBehaviouralQuestion.value) < 1) {
-        numOfBehaviouralQuestion.value = 1
-    }
-
-    if (parseInt(numOfBehaviouralQuestion.value) > parseInt(numOfQuestion.value)) {
-        numOfBehaviouralQuestion.value = parseInt(numOfQuestion.value);
-    }
-*/
 

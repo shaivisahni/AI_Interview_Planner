@@ -9,11 +9,14 @@
 </head>
 
 <body>
-
+<div class = "full-page-index">
     <h1>AI Interview Generator</h1>
     <br>
 
-    <label for="num-of-question">How many questions would you like?</label>
+    <h3>Searchless</h3>
+
+    <img src="searchless_logo (1).png" id="logo">
+    <label id="num-of-question-label" for="num-of-question">How many questions would you like?</label>
 
     <br>
 
@@ -21,48 +24,27 @@
         onkeydown="if (event.key==='.'|| event.key==='-' || event.key==='e'|| event.key==='E') {event.preventDefault();}"
         oninput="checkNumInput()">
 
+    <!--
     <br>
     <br>
 
-    <label for="behavioral-or-technical">Do you want to generate Behavioral or Technical questions?</label>
+    <label for="behavioral-or-static">Do you want to generate Behavioral or Static questions?</label>
     <br>
     <input type="radio" id="behavioral-check"  name="question-type" value="Behavioral">
     <label for="behavioral-check">Behavioral</label>
     <br>
-    <input type="radio" id="technical-check" name="question-type" value="Technical">
-    <label for="technical-check">Technical</label>
+    <input type="radio" id="static-check" name="question-type" value="Static">
+    <label for="static-check">Static</label>
     <br>
     <input type="radio" id="both-check" name="question-type" value="Both">
     <label for="both-check">Both</label>
-
-
-    <!--
-    <label for="num-of-behavioural">How many of these questions would you like to be behavioral?</label>
-
-    <br>
-
-    <input id="num-of-behavioural" type="number" min="0" step="1"
-        onkeydown="if (event.key==='.'|| event.key==='-' || event.key==='e'|| event.key==='E') {event.preventDefault();}"
-        oninput="maxTechnicalQuestions()">
-
-    <br>
-    <br>
-
-    <label for="num-of-technical">How many of these questions would you like to be technical?</label>
-
-    <br>
-
-    <input id="num-of-technical" type="number" min="0" step="1"
-        onkeydown="if (event.key==='.'|| event.key==='-' || event.key==='e'|| event.key==='E') {event.preventDefault();}"
-        oninput="maxBehaviouralQuestions()">
-
-
 -->
-    <br>
-    <br>
- 
 
-    <label for="job-title">What is the job title?</label>
+    <br>
+    <br>
+
+
+    <label id="job-title-label" for="job-title">What is the job title?</label>
 
     <br>
 
@@ -71,7 +53,7 @@
     <br>
     <br>
 
-    <label for="company">What is company are you applying to?</label>
+    <label id="company-label" for="company">What is company are you applying to?</label>
 
     <br>
 
@@ -80,7 +62,7 @@
     <br>
     <br>
 
-    <label for="job-description">What is the job description?</label>
+    <label id="job-description-label" for="job-description">What is the job description?</label>
 
     <br>
 
@@ -89,14 +71,11 @@
     <br>
     <br>
 
-    <button onclick="generateResponse()">Generate Interview Questions</button>
+    <button id="generate" onclick="generateResponse()">Generate Interview Questions</button>
 
-    <br>
-    <br>
-
-    <div id="output"></div>
-
+</div>
     <script src="script.js" defer></script>
+
 </body>
 
 </html>
