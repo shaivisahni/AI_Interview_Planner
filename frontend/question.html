@@ -1,4 +1,5 @@
-</html><!DOCTYPE html>
+</html>
+<!DOCTYPE html>
 
 <html>
 
@@ -9,13 +10,32 @@
 </head>
 
 <body>
+
     <body onload="displayQuestions()">
 
-    <h1> hihi</h1>
+        <h1> hihi</h1>
 
-    <div id="output"></div>
+        <div id="output"></div>
 
-    <script src="script.js" defer></script>
-</body>
+        <div class="modal-container" id="modal_container">
+            <div class="modal">
+                <span class="close-btn" onclick="cancelEdit() ">&times;</span>
+                <textarea id="edit-textarea" rows="4"></textarea>
 
-</html> 
+                <select name="question-type-option" id="type">
+                    <option value="welcome">Send a welcome message</option>
+                    <option value="custom">Ask a custom question</option>
+                    <option value="static">Send a static message</option>
+                    <option value="star">Ask a STAR-based skill question</option>
+                    <option value="closing">Send a closing message</option>
+                </select>
+
+                <button onclick="saveEdit()">Save</button>
+                <button onclick="cancelEdit()">Cancel</button>
+            </div>
+        </div>
+
+        <script src="script.js" defer></script>
+    </body>
+
+</html>

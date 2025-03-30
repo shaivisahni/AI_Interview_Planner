@@ -1,81 +1,38 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
     <title>Interview Question Generator</title>
     <link rel="stylesheet" href="styles.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-<div class = "full-page-index">
-    <h1>AI Interview Generator</h1>
-    <br>
+    <div class="container">
 
-    <h3>Searchless</h3>
+        <h1 class="title-intro-page">MY INTERVIEW PLANNER</h1>
+        <h3 class="company-name">Searchless</h3>
+        <img src="searchless_logo (1).png" class="logo">
 
-    <img src="searchless_logo (1).png" id="logo">
-    <label id="num-of-question-label" for="num-of-question">How many questions would you like?</label>
+    <div class="full-width-divider"></div>
 
-    <br>
+    <div class="input-group purple-top">
+        <div class="section-header">
+            <h2>Job Title</h2>
+        </div>
+        <input id="job-title" class="text-input" type="text" placeholder="Enter job title...">
+    </div>
 
-    <input id="num-of-question" type="number" max=99 min="1" step="1"
-        onkeydown="if (event.key==='.'|| event.key==='-' || event.key==='e'|| event.key==='E') {event.preventDefault();}"
-        oninput="checkNumInput()">
+    <div class="input-group purple-top">
+        <div class="section-header">
+            <h2>Job Description</h2>
+        </div>
+        <textarea id="job-description" class="text-area" placeholder="Enter job description..."></textarea>
+    </div>
 
-    <!--
-    <br>
-    <br>
-
-    <label for="behavioral-or-static">Do you want to generate Behavioral or Static questions?</label>
-    <br>
-    <input type="radio" id="behavioral-check"  name="question-type" value="Behavioral">
-    <label for="behavioral-check">Behavioral</label>
-    <br>
-    <input type="radio" id="static-check" name="question-type" value="Static">
-    <label for="static-check">Static</label>
-    <br>
-    <input type="radio" id="both-check" name="question-type" value="Both">
-    <label for="both-check">Both</label>
--->
-
-    <br>
-    <br>
-
-
-    <label id="job-title-label" for="job-title">What is the job title?</label>
-
-    <br>
-
-    <input id="job-title" type="text">
-
-    <br>
-    <br>
-
-    <label id="company-label" for="company">What is company are you applying to?</label>
-
-    <br>
-
-    <input id="company" type="text">
-
-    <br>
-    <br>
-
-    <label id="job-description-label" for="job-description">What is the job description?</label>
-
-    <br>
-
-    <input id="job-description" type="text">
-
-    <br>
-    <br>
-
-    <button id="generate" onclick="generateResponse()">Generate Interview Questions</button>
-
+    <div class="button-container">
+        <button id="generate" class="generate-button" onclick="generateResponse()">Generate Interview</button>
+    </div>
 </div>
-    <script src="script.js" defer></script>
 
+    <script src="script.js"></script>
 </body>
-
 </html>
