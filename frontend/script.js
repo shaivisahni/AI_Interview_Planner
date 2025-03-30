@@ -1,23 +1,3 @@
-/*numOfQuestion = document.getElementById("num-of-question");
-
-function checkNumInput() {
-    let totalQuestions = parseInt(numOfQuestion.value);
-
-    if (totalQuestions > 99) {
-        numOfQuestion.value = 99;
-        totalQuestions = 99;
-    }
-
-    if (totalQuestions < 1) {
-        numOfQuestion.value = 1;
-        totalQuestions = 1;
-    }
-
-}
-*/
-
-const modal_container = document.getElementById("modal_container");
-
 async function generateResponse() {
     const jobTitle = document.getElementById("job-title").value;
     const jobDescription = document.getElementById("job-description").value;
@@ -54,6 +34,12 @@ async function generateResponse() {
 }
 
 
+const modal_container = document.getElementById("modal_container");
+const editTextarea = document.getElementById("edit-textarea");
+const questionTypeSelect = document.getElementById("type");
+
+let currentEditIndex = null;
+
 function displayQuestions() {
     const data = JSON.parse(localStorage.getItem("interviewData"));
     const outputDiv = document.getElementById("output");
@@ -62,14 +48,13 @@ function displayQuestions() {
         <div class="questions">
             ${data.questions.map((q, index) => `
                 <div class="question-item" id="question-${index}">
-                    <!-- Left: Question Type -->
-                    <textarea id="question-type-${index}" class="question-type" rows="2" readonly>${q.type}</textarea>
-
-                    <!-- Right: AI-Generated Question -->
-                    <textarea id="question-text-${index}" class="question-text" rows="4" readonly>${q.text}</textarea>
-
-                    <!-- Edit Button -->
-                    <button onclick="editQuestion(${index})" class="edit-question">Edit</button>
+                    <div class="question-type-container">
+                        <div class="question-type">${q.type}</div>
+                    </div>
+                    <div class="question-content-row">
+                        <div class="question-text">${q.text}</div>
+                        <button onclick="editQuestion(${index})" class="edit-question">Edit</button>
+                    </div>
                 </div>
             `).join('')}
         </div>
@@ -77,22 +62,47 @@ function displayQuestions() {
 }
 
     
-
-
 function editQuestion(index) {
-    modal_container.classList.add('show');
+    const data = JSON.parse(localStorage.getItem("interviewData"));
+    const selectedQuestion = data.questions[index];
+
+    currentEditIndex = index; // Store the index of the question being edited
+    editTextarea.value = selectedQuestion.text; // Populate textarea with question text
+
+    // Ensure dropdown updates properly
+    const matchingOption = [...questionTypeSelect.options].find(option => option.value === selectedQuestion.type);
+    if (matchingOption) {
+        questionTypeSelect.value = selectedQuestion.type;
+    } else {
+        questionTypeSelect.selectedIndex = 0; // Default to first option if not found
+    }
+
+    modal_container.classList.add("show");
 }
 
-
 function saveEdit() {
+    if (currentEditIndex === null) return;
 
-    modal_container.classList.remove('show');
+    let data = JSON.parse(localStorage.getItem("interviewData"));
 
+    // Update the question's text and type
+    data.questions[currentEditIndex].text = editTextarea.value;
+    data.questions[currentEditIndex].type = questionTypeSelect.value;
+
+    // Save back to localStorage
+    localStorage.setItem("interviewData", JSON.stringify(data));
+
+    // Refresh displayed questions
+    displayQuestions();
+
+    // Close modal
+    modal_container.classList.remove("show");
+    currentEditIndex = null; // Reset the edit index
 }
 
 function cancelEdit() {
-    modal_container.classList.remove('show');
-
+    modal_container.classList.remove("show");
+    currentEditIndex = null;
 }
 
 function deleteQuestion() {

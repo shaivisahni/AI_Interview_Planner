@@ -1,37 +1,44 @@
-</html>
 <!DOCTYPE html>
-
 <html>
-
 <head>
     <title>Interview Question Generator</title>
     <link rel="stylesheet" href="styles.css">
-
 </head>
+<body onload="displayQuestions()">
 
-<body>
 
-    <body onload="displayQuestions()">
+        <h1 class="title-intro-page-2">GENERATED RESPONSE</h1>
+        <h3 class="company-name-2">Searchless</h3>
+        <img src="searchless_logo.jpeg" class="logo-2">
 
-        <h1> hihi</h1>
-
-        <div id="output"></div>
+    
+    <div id="output"></div>
 
         <div class="modal-container" id="modal_container">
             <div class="modal">
-                <span class="close-btn" onclick="cancelEdit() ">&times;</span>
-                <textarea id="edit-textarea" rows="4"></textarea>
-
-                <select name="question-type-option" id="type">
-                    <option value="welcome">Send a welcome message</option>
-                    <option value="custom">Ask a custom question</option>
-                    <option value="static">Send a static message</option>
-                    <option value="star">Ask a STAR-based skill question</option>
-                    <option value="closing">Send a closing message</option>
-                </select>
-
-                <button onclick="saveEdit()">Save</button>
-                <button onclick="cancelEdit()">Cancel</button>
+                <div class="modal-header purple-top">
+                    <h2 class="modal-title">Edit Question</h2>
+                    <span class="close-btn" onclick="cancelEdit()">&times;</span>
+                </div>
+                <div class="modal-content">
+                    <h1 class="edit-manually">Edit Question Manually</h1>
+                    <select name="question-type-option" id="type" class="question-type-dropdown">
+                        <option value="Send a welcome message">Send a welcome message</option>
+                        <option value="Ask a custom question">Ask a custom question</option>
+                        <option value="Send a static message">Send a static message</option>
+                        <option value="Ask a STAR-based skill question">Ask a STAR-based skill question</option>
+                        <option value="Send a closing message">Send a closing message</option>
+                    </select>
+                    
+                    <textarea id="edit-textarea" class="modal-textarea" rows="4"></textarea>
+                    
+                    <div class="edit-suggestion">Or Generate New Question with AI  Prompt?</div>
+                    
+                    <div class="modal-buttons">
+                        <button class="cancel-btn" onclick="cancelEdit()">Cancel</button>
+                        <button class="save-btn" onclick="saveEdit()">Save Changes</button>
+                    </div>
+                </div>
             </div>
         </div>
 
