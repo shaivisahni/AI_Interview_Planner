@@ -1,3 +1,14 @@
+function showLoader() {
+    const loaderContainer = document.getElementById("load_container");
+    loaderContainer.classList.add("show");
+}
+
+// Hide the loader
+function hideLoader() {
+    const loaderContainer = document.getElementById("load_container");
+    loaderContainer.classList.remove("show");
+}
+
 async function generateResponse() {
     const jobTitle = document.getElementById("job-title").value;
     const jobDescription = document.getElementById("job-description").value;
@@ -6,6 +17,8 @@ async function generateResponse() {
         return;
     }
 
+    showLoader();
+    load_container.classList.add("show");
     const response = await fetch("http://localhost:8000/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,8 +43,10 @@ async function generateResponse() {
         }
     }));
 
+    hideLoader(); // Hide the loader when data is ready
     window.location.href = "question.html";
 }
+
 
 
 const modal_container = document.getElementById("modal_container");
@@ -105,6 +120,16 @@ function cancelEdit() {
     currentEditIndex = null;
 }
 
-function deleteQuestion() {
+function deleteCancelEdit() {
+    delete_modal_container.classList.remove("show");
+    currentEditIndex = null;
+}
 
+function deleteQuestion() {
+    localStorage.removeItem("interviewData");
+    window.location.href = "index.html";
+}
+
+function openDeleteQuestion() {
+    delete_modal_container.classList.add("show");
 }

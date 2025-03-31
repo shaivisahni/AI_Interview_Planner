@@ -12,7 +12,10 @@
         <img src="searchless_logo.jpeg" class="logo-2">
 
     
-    <div id="output"></div>
+    <div id="output">
+    </div>
+
+    <button class="delete-btn" onclick="openDeleteQuestion()">Delete ALL Question </button>
 
         <div class="modal-container" id="modal_container">
             <div class="modal">
@@ -37,6 +40,24 @@
                     <div class="modal-buttons">
                         <button class="cancel-btn" onclick="cancelEdit()">Cancel</button>
                         <button class="save-btn" onclick="saveEdit()">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="delete-modal-container" id="delete_modal_container">
+            <div class="modal">
+                <div class="modal-header purple-top">
+                    <span class="delete-close-btn" onclick="deleteCancelEdit()">&times;</span>
+                </div>
+                <div class="delete-modal-content">
+                    <h1 class="delete-text">If you continue, all questions will be deleted.<br>
+                        Are you sure you want to proceed? <br> </h1>
+                    
+                    <div class="modal-buttons">
+                        <button class="delete-cancel-btn" onclick="deleteCancelEdit()">Cancel</button>
+                        <button class="delete-modal-btn" onclick="deleteQuestion()">Delete Questions</button>
                     </div>
                 </div>
             </div>
