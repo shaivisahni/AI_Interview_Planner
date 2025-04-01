@@ -92,7 +92,7 @@ Generation Guidelines:
     response = ollama.generate(
         model="llama3",
         prompt=llm_prompt,
-        options={'temperature': 0.7}
+        options={'temperature': 0.2}
     )
 
     response_text = response['response'].strip()
@@ -107,9 +107,33 @@ Generation Guidelines:
     i = 0
 
     while i < len(lines) - 1:
-        q_type = lines[i]   # First line is the question type
-        q_text = lines[i+1] # Second line is the question text
+        q_type = lines[i]   
+        q_text = lines[i+1]
         questions.append({"type": q_type, "text": q_text})
-        i += 2  # Move to the next pair
+        i += 2 
 
     return {"questions": questions}
+
+
+@app.post("/new")
+async def generateNewQuestion(request: Request):
+    new_question_data = await request.json()
+
+    if "newQuestionPrompt" not in new_question_data or not new_question_data["newQuestionPrompt"]:
+        return {"error": "I apologize, but there is no prompt provided. Please provide a prompt."}
+
+    prompt = f"""
+    Generate one new question based on this prompt: 
+    {new_question_data["newQuestionPrompt"]}
+ONLY RETURN QUESTION, NOTHING ELSE
+    """
+
+    response = ollama.generate(
+        model="llama3", 
+        prompt=prompt,
+        options={'temperature': 0.7}
+    )
+
+    new_question_text = response["response"]
+
+    return {"response": new_question_text}

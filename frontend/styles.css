@@ -78,7 +78,6 @@ body {
     width: 100vw;
 }
 
-/* Input Groups */
 .input-group {
     margin-bottom: 30px;
     border-radius: 8px;
@@ -142,8 +141,6 @@ body {
 .generate-button:hover {
     background-color: #5a3fd8;
 }
-
-/* Modal Styles */
 
 .delete-modal-container {
     position: fixed;
@@ -269,6 +266,7 @@ body {
     font-weight: 600;
     margin: 0 0 15px 0;
     padding: 0;
+    text-align: center;
 }
 
 .delete-text {
@@ -303,6 +301,8 @@ body {
     font-size: 16px;
     font-weight: 600;
     font-family: "Inter", sans-serif;
+    position: relative;
+    right: 10px;
 }
 
 
@@ -368,6 +368,8 @@ body {
     font-size: 16px;
     font-weight: 600;
     font-family: "Inter", sans-serif;
+    position: relative;
+    right: 10px;
 }
 
 .cancel-btn:hover {
@@ -390,7 +392,6 @@ body {
     background-color: #f3f0ff;
 }
 
-/* Generated Response Header */
 .generated-response-header {
     max-width: 1000px;
     width: 90%;
@@ -418,7 +419,6 @@ body {
     font-style: italic;
 }
 
-/* Question Styles (NEW) */
 .questions {
     max-width: 1000px;
     width: 90%;
@@ -477,24 +477,23 @@ body {
 .edit-question:hover {
     background-color: #5a3fd8;
 }
-/* Loader modal background */
+
 .loader-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #f8f9fa; /* Semi-transparent background */
+    background-color: #f8f9fa; 
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    pointer-events: none;  /* Prevent interaction with background */
+    pointer-events: none;  
     transition: opacity 0.3s ease;
-    z-index: 1000;  /* Ensure it's on top */
+    z-index: 1000; 
 }
 
-/* Loader spinner */
 .loader {
     display: flex;
     justify-content: center;
@@ -521,9 +520,90 @@ body {
         transform: rotate(1turn);
     }
 }
-
-/* Show the loader */
 .loader-container.show {
     opacity: 1;
-    pointer-events: auto;  /* Allow interaction when modal is visible */
+    pointer-events: auto; 
 }
+
+/* AI Section in Modal */
+.modal-AI-title {
+    font-size: 20px;
+    color: #694de9;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    padding: 0;
+    text-align: center;
+}
+
+#new-question-AI {
+    width: 95%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-family: "Inter", sans-serif;
+    resize: vertical;
+    min-height: 80px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+}
+
+
+#question-AI-output {
+    width: 95%;
+    padding: 15px;
+    border: 1px solid #d9d2ff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-family: "Inter", sans-serif;
+    resize: vertical;
+    min-height: 120px;
+    font-size: 16px;
+    background-color: #f5f5ff;
+}
+
+/* AI Generate Button */
+.save-btn-AI {
+    background-color: #694de9;;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    position: relative;
+    right: 10px;
+}
+
+.save-btn-AI:hover {
+    background-color: #5a3fd8;
+}
+
+/* AI Generate Button */
+.generate-question-btn-AI {
+    background-color: #4285F4; /* Google blue */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    width: 60%;
+    margin: 15px auto; /* Space above and below */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: block;
+    position: relative;
+    text-align: center;
+}
+
+.generate-question-btn-AI:hover {
+    background-color: #3367D6; /* Darker blue */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: translateY(-1px);
+}
+

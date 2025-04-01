@@ -17,33 +17,36 @@
 
     <button class="delete-btn" onclick="openDeleteQuestion()">Delete ALL Question </button>
 
-        <div class="modal-container" id="modal_container">
-            <div class="modal">
-                <div class="modal-header purple-top">
-                    <h2 class="modal-title">Edit Question</h2>
-                    <span class="close-btn" onclick="cancelEdit()">&times;</span>
-                </div>
-                <div class="modal-content">
-                    <h1 class="edit-manually">Edit Question Manually</h1>
-                    <select name="question-type-option" id="type" class="question-type-dropdown">
-                        <option value="Send a welcome message">Send a welcome message</option>
-                        <option value="Ask a custom question">Ask a custom question</option>
-                        <option value="Send a static message">Send a static message</option>
-                        <option value="Ask a STAR-based skill question">Ask a STAR-based skill question</option>
-                        <option value="Send a closing message">Send a closing message</option>
-                    </select>
-                    
-                    <textarea id="edit-textarea" class="modal-textarea" rows="4"></textarea>
-                    
-                    <div class="edit-suggestion">Or Generate New Question with AI  Prompt?</div>
-                    
-                    <div class="modal-buttons">
-                        <button class="cancel-btn" onclick="cancelEdit()">Cancel</button>
-                        <button class="save-btn" onclick="saveEdit()">Save Changes</button>
-                    </div>
+    <div class="modal-container" id="modal_container">
+        <div class="modal">
+            <div class="modal-header purple-top">
+                <h2 class="modal-title">Edit Question</h2>
+                <span class="close-btn" onclick="cancelEdit()">&times;</span>
+            </div>
+            <div class="modal-content">
+                <h1 class="edit-manually">Edit Question Manually</h1>
+                <select name="question-type-option" id="type" class="question-type-dropdown">
+                    <option value="Send a welcome message">Send a welcome message</option>
+                    <option value="Ask a custom question">Ask a custom question</option>
+                    <option value="Send a static message">Send a static message</option>
+                    <option value="Ask a STAR-based skill question">Ask a STAR-based skill question</option>
+                    <option value="Send a closing message">Send a closing message</option>
+                </select>
+    
+                <textarea id="edit-textarea" class="modal-textarea" rows="4"></textarea>
+                <h2 class="modal-AI-title">Or Generate New Question with AI Prompt</h2>
+                <textarea name="new-question-AI" id="new-question-AI" placeholder="Enter your prompt here"></textarea>
+                <button class="generate-question-btn-AI" onclick="generateNewQuestion()">Generate</button>
+                <br>
+                <textarea class= "question-AI-output" name="question-AI-output" id="question-AI-output" placeholder="Response will generate here" readonly></textarea>
+                <div class="modal-buttons">
+                    <button class="cancel-btn" onclick="cancelEdit()">Cancel</button>
+                    <button class="save-btn" onclick="saveEdit()">Save  Changes</button>
                 </div>
             </div>
         </div>
+    </div>
+    
 
 
         <div class="delete-modal-container" id="delete_modal_container">

@@ -3,7 +3,6 @@ function showLoader() {
     loaderContainer.classList.add("show");
 }
 
-// Hide the loader
 function hideLoader() {
     const loaderContainer = document.getElementById("load_container");
     loaderContainer.classList.remove("show");
@@ -18,7 +17,7 @@ async function generateResponse() {
     }
 
     showLoader();
-    load_container.classList.add("show");
+
     const response = await fetch("http://localhost:8000/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -39,11 +38,12 @@ async function generateResponse() {
         questions: structuredQuestions,
         meta: {
             jobTitle: jobTitle,
+            jobDescription: jobDescription,
             date: new Date().toLocaleDateString()
         }
     }));
 
-    hideLoader(); // Hide the loader when data is ready
+    hideLoader();
     window.location.href = "question.html";
 }
 
@@ -52,6 +52,9 @@ async function generateResponse() {
 const modal_container = document.getElementById("modal_container");
 const editTextarea = document.getElementById("edit-textarea");
 const questionTypeSelect = document.getElementById("type");
+const newQuestionPrompt = document.getElementById("new-question-AI");
+const questionAIOutput = document.getElementById("question-AI-output");
+const questionAIInput = document.getElementById("new-question-AI");
 
 let currentEditIndex = null;
 
@@ -81,15 +84,14 @@ function editQuestion(index) {
     const data = JSON.parse(localStorage.getItem("interviewData"));
     const selectedQuestion = data.questions[index];
 
-    currentEditIndex = index; // Store the index of the question being edited
-    editTextarea.value = selectedQuestion.text; // Populate textarea with question text
+    currentEditIndex = index; 
+    editTextarea.value = selectedQuestion.text; 
 
-    // Ensure dropdown updates properly
     const matchingOption = [...questionTypeSelect.options].find(option => option.value === selectedQuestion.type);
     if (matchingOption) {
         questionTypeSelect.value = selectedQuestion.type;
     } else {
-        questionTypeSelect.selectedIndex = 0; // Default to first option if not found
+        questionTypeSelect.selectedIndex = 0; 
     }
 
     modal_container.classList.add("show");
@@ -100,19 +102,25 @@ function saveEdit() {
 
     let data = JSON.parse(localStorage.getItem("interviewData"));
 
-    // Update the question's text and type
-    data.questions[currentEditIndex].text = editTextarea.value;
     data.questions[currentEditIndex].type = questionTypeSelect.value;
 
-    // Save back to localStorage
+    if (editTextarea && !questionAIOutput.value.trim()) {
+        data.questions[currentEditIndex].text = editTextarea.value;
+    } else if (questionAIOutput && questionAIOutput.value.trim()) {
+        data.questions[currentEditIndex].text = questionAIOutput.value;
+    } else {
+        data.questions[currentEditIndex].text = editTextarea.value;
+    }
+
+    questionAIOutput.value ="";
+    questionAIInput.value = "";
+
     localStorage.setItem("interviewData", JSON.stringify(data));
 
-    // Refresh displayed questions
     displayQuestions();
 
-    // Close modal
     modal_container.classList.remove("show");
-    currentEditIndex = null; // Reset the edit index
+    currentEditIndex = null; 
 }
 
 function cancelEdit() {
@@ -133,3 +141,29 @@ function deleteQuestion() {
 function openDeleteQuestion() {
     delete_modal_container.classList.add("show");
 }
+
+async function generateNewQuestion() {
+    const promptInput = document.getElementById("new-question-AI").value;
+
+    if (!promptInput.trim()) {
+        alert("Please enter a valid prompt!");
+        return; 
+    }
+
+    const response = await fetch("http://localhost:8000/new", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            newQuestionPrompt: promptInput
+        })
+    });
+
+    const data = await response.json();
+
+
+    document.getElementById("question-AI-output").value = data.response;
+
+}
+
