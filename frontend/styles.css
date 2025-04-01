@@ -525,7 +525,6 @@ body {
     pointer-events: auto; 
 }
 
-/* AI Section in Modal */
 .modal-AI-title {
     font-size: 20px;
     color: #694de9;
@@ -562,7 +561,6 @@ body {
     background-color: #f5f5ff;
 }
 
-/* AI Generate Button */
 .save-btn-AI {
     background-color: #694de9;;
     color: white;
@@ -581,9 +579,8 @@ body {
     background-color: #5a3fd8;
 }
 
-/* AI Generate Button */
 .generate-question-btn-AI {
-    background-color: #4285F4; /* Google blue */
+    background-color: #4285F4;
     color: white;
     border: none;
     padding: 12px 24px;
@@ -593,7 +590,7 @@ body {
     font-weight: 600;
     font-family: "Inter", sans-serif;
     width: 60%;
-    margin: 15px auto; /* Space above and below */
+    margin: 15px auto; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
     display: block;
@@ -602,7 +599,7 @@ body {
 }
 
 .generate-question-btn-AI:hover {
-    background-color: #3367D6; /* Darker blue */
+    background-color: #3367D6; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transform: translateY(-1px);
 }
