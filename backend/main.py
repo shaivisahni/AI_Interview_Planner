@@ -92,7 +92,7 @@ Generation Guidelines:
     response = ollama.generate(
         model="llama3",
         prompt=llm_prompt,
-        options={'temperature': 0.2}
+        options={'temperature': 0.7}
     )
 
     response_text = response['response'].strip()

@@ -39,7 +39,6 @@ async function generateResponse() {
         meta: {
             jobTitle: jobTitle,
             jobDescription: jobDescription,
-            date: new Date().toLocaleDateString()
         }
     }));
 
@@ -144,11 +143,6 @@ function openDeleteQuestion() {
 
 async function generateNewQuestion() {
     const promptInput = document.getElementById("new-question-AI").value;
-
-    if (!promptInput.trim()) {
-        alert("Please enter a valid prompt!");
-        return; 
-    }
 
     const response = await fetch("http://localhost:8000/new", {
         method: "POST",
